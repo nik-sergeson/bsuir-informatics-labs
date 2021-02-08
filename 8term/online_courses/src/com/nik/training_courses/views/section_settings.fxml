@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="98.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="10.0" prefWidth="177.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Back" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Label text="Name" />
+      <TextField fx:id="name" text="Section" GridPane.columnIndex="1" />
+      <Label text="Release date" GridPane.rowIndex="1" />
+      <DatePicker fx:id="releaseDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Soft deadline" GridPane.rowIndex="2" />
+      <Label text="Hard deadline" GridPane.rowIndex="3" />
+      <DatePicker fx:id="softDeadline" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <DatePicker fx:id="hardDeadline" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <CheckBox fx:id="hideFromStudents" mnemonicParsing="false" text="Hide from students" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Save" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+   </children>
+</GridPane>

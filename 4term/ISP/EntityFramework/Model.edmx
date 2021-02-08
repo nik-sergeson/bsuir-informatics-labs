@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NewDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="NewDBModelStoreContainer">
+          <EntitySet Name="Aeroplane" EntityType="NewDBModel.Store.Aeroplane" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="baggage" EntityType="NewDBModel.Store.baggage" store:Type="Tables" store:Schema="dbo" store:Name="baggage">
+            <DefiningQuery>SELECT 
+      [baggage].[ownerid] AS [ownerid], 
+      [baggage].[weight] AS [weight]
+      FROM [dbo].[baggage] AS [baggage]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Client" EntityType="NewDBModel.Store.Client" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Flight" EntityType="NewDBModel.Store.Flight" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Passport" EntityType="NewDBModel.Store.Passport" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Station" EntityType="NewDBModel.Store.Station" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="NewDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ticket" EntityType="NewDBModel.Store.Ticket" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Aeroplane_Flight1" Association="NewDBModel.Store.FK_Aeroplane_Flight1">
+            <End Role="Flight" EntitySet="Flight" />
+            <End Role="Aeroplane" EntitySet="Aeroplane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_baggage_Client1" Association="NewDBModel.Store.FK_baggage_Client1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="baggage" EntitySet="baggage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flight_Station1" Association="NewDBModel.Store.FK_Flight_Station1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Flight" EntitySet="Flight" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passport_Client" Association="NewDBModel.Store.FK_Passport_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Passport" EntitySet="Passport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Aeroplane1" Association="NewDBModel.Store.FK_Ticket_Aeroplane1">
+            <End Role="Aeroplane" EntitySet="Aeroplane" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Client1" Association="NewDBModel.Store.FK_Ticket_Client1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aeroplane">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="flightid" Type="int" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'NewDB.dbo.baggage' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="baggage">
+          <Key>
+            <PropertyRef Name="ownerid" />
+            <PropertyRef Name="weight" />
+          </Key>
+          <Property Name="ownerid" Type="int" Nullable="false" />
+          <Property Name="weight" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="departingpointid" Type="int" Nullable="false" />
+          <Property Name="arrivalpointid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passport">
+          <Key>
+            <PropertyRef Name="ownerid" />
+          </Key>
+          <Property Name="ownerid" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="photo" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="secondname" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="departingtime" Type="datetime" Nullable="false" />
+          <Property Name="arrivaltime" Type="datetime" Nullable="false" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="country" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="aeroplaneid" Type="int" Nullable="false" />
+          <Property Name="ownerid" Type="int" Nullable="false" />
+          <Property Name="flightid" Type="int" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="seat" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Aeroplane_Flight1">
+          <End Role="Flight" Type="NewDBModel.Store.Flight" Multiplicity="1" />
+          <End Role="Aeroplane" Type="NewDBModel.Store.Aeroplane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Aeroplane">
+              <PropertyRef Name="flightid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_baggage_Client1">
+          <End Role="Client" Type="NewDBModel.Store.Client" Multiplicity="1" />
+          <End Role="baggage" Type="NewDBModel.Store.baggage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="baggage">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flight_Station1">
+          <End Role="Station" Type="NewDBModel.Store.Station" Multiplicity="1" />
+          <End Role="Flight" Type="NewDBModel.Store.Flight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Flight">
+              <PropertyRef Name="departingpointid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passport_Client">
+          <End Role="Client" Type="NewDBModel.Store.Client" Multiplicity="1" />
+          <End Role="Passport" Type="NewDBModel.Store.Passport" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Passport">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Aeroplane1">
+          <End Role="Aeroplane" Type="NewDBModel.Store.Aeroplane" Multiplicity="1" />
+          <End Role="Ticket" Type="NewDBModel.Store.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroplane">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="aeroplaneid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Client1">
+          <End Role="Client" Type="NewDBModel.Store.Client" Multiplicity="1" />
+          <End Role="Ticket" Type="NewDBModel.Store.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NewDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Aeroplane" EntityType="NewDBModel.Aeroplane" />
+          <EntitySet Name="baggage" EntityType="NewDBModel.baggage" />
+          <EntitySet Name="Client" EntityType="NewDBModel.Client" />
+          <EntitySet Name="Flight" EntityType="NewDBModel.Flight" />
+          <EntitySet Name="Passport" EntityType="NewDBModel.Passport" />
+          <EntitySet Name="Station" EntityType="NewDBModel.Station" />
+          <EntitySet Name="sysdiagrams" EntityType="NewDBModel.sysdiagrams" />
+          <EntitySet Name="Ticket" EntityType="NewDBModel.Ticket" />
+          <AssociationSet Name="FK_Aeroplane_Flight1" Association="NewDBModel.FK_Aeroplane_Flight1">
+            <End Role="Flight" EntitySet="Flight" />
+            <End Role="Aeroplane" EntitySet="Aeroplane" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Aeroplane1" Association="NewDBModel.FK_Ticket_Aeroplane1">
+            <End Role="Aeroplane" EntitySet="Aeroplane" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_baggage_Client1" Association="NewDBModel.FK_baggage_Client1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="baggage" EntitySet="baggage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passport_Client" Association="NewDBModel.FK_Passport_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Passport" EntitySet="Passport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Client1" Association="NewDBModel.FK_Ticket_Client1">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flight_Station1" Association="NewDBModel.FK_Flight_Station1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Flight" EntitySet="Flight" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aeroplane">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="flightid" Type="Int32" Nullable="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Flight" Relationship="NewDBModel.FK_Aeroplane_Flight1" FromRole="Aeroplane" ToRole="Flight" />
+          <NavigationProperty Name="Ticket" Relationship="NewDBModel.FK_Ticket_Aeroplane1" FromRole="Aeroplane" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="baggage">
+          <Key>
+            <PropertyRef Name="ownerid" />
+            <PropertyRef Name="weight" />
+          </Key>
+          <Property Name="ownerid" Type="Int32" Nullable="false" />
+          <Property Name="weight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="NewDBModel.FK_baggage_Client1" FromRole="baggage" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="baggage" Relationship="NewDBModel.FK_baggage_Client1" FromRole="Client" ToRole="baggage" />
+          <NavigationProperty Name="Passport" Relationship="NewDBModel.FK_Passport_Client" FromRole="Client" ToRole="Passport" />
+          <NavigationProperty Name="Ticket" Relationship="NewDBModel.FK_Ticket_Client1" FromRole="Client" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="departingpointid" Type="Int32" Nullable="false" />
+          <Property Name="arrivalpointid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Aeroplane" Relationship="NewDBModel.FK_Aeroplane_Flight1" FromRole="Flight" ToRole="Aeroplane" />
+          <NavigationProperty Name="Station" Relationship="NewDBModel.FK_Flight_Station1" FromRole="Flight" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="Passport">
+          <Key>
+            <PropertyRef Name="ownerid" />
+          </Key>
+          <Property Name="ownerid" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="photo" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="secondname" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Client" Relationship="NewDBModel.FK_Passport_Client" FromRole="Passport" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="departingtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="arrivaltime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Flight" Relationship="NewDBModel.FK_Flight_Station1" FromRole="Station" ToRole="Flight" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="aeroplaneid" Type="Int32" Nullable="false" />
+          <Property Name="ownerid" Type="Int32" Nullable="false" />
+          <Property Name="flightid" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="seat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Aeroplane" Relationship="NewDBModel.FK_Ticket_Aeroplane1" FromRole="Ticket" ToRole="Aeroplane" />
+          <NavigationProperty Name="Client" Relationship="NewDBModel.FK_Ticket_Client1" FromRole="Ticket" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Aeroplane_Flight1">
+          <End Role="Flight" Type="NewDBModel.Flight" Multiplicity="1" />
+          <End Role="Aeroplane" Type="NewDBModel.Aeroplane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Aeroplane">
+              <PropertyRef Name="flightid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Aeroplane1">
+          <End Role="Aeroplane" Type="NewDBModel.Aeroplane" Multiplicity="1" />
+          <End Role="Ticket" Type="NewDBModel.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aeroplane">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="aeroplaneid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_baggage_Client1">
+          <End Role="Client" Type="NewDBModel.Client" Multiplicity="1" />
+          <End Role="baggage" Type="NewDBModel.baggage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="baggage">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passport_Client">
+          <End Role="Client" Type="NewDBModel.Client" Multiplicity="1" />
+          <End Role="Passport" Type="NewDBModel.Passport" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Passport">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Client1">
+          <End Role="Client" Type="NewDBModel.Client" Multiplicity="1" />
+          <End Role="Ticket" Type="NewDBModel.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="ownerid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Flight_Station1">
+          <End Role="Station" Type="NewDBModel.Station" Multiplicity="1" />
+          <End Role="Flight" Type="NewDBModel.Flight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Flight">
+              <PropertyRef Name="departingpointid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewDBModelStoreContainer" CdmEntityContainer="NewDBEntities">
+          <EntitySetMapping Name="Aeroplane">
+            <EntityTypeMapping TypeName="NewDBModel.Aeroplane">
+              <MappingFragment StoreEntitySet="Aeroplane">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="flightid" ColumnName="flightid" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="baggage">
+            <EntityTypeMapping TypeName="NewDBModel.baggage">
+              <MappingFragment StoreEntitySet="baggage">
+                <ScalarProperty Name="ownerid" ColumnName="ownerid" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="NewDBModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flight">
+            <EntityTypeMapping TypeName="NewDBModel.Flight">
+              <MappingFragment StoreEntitySet="Flight">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="departingpointid" ColumnName="departingpointid" />
+                <ScalarProperty Name="arrivalpointid" ColumnName="arrivalpointid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passport">
+            <EntityTypeMapping TypeName="NewDBModel.Passport">
+              <MappingFragment StoreEntitySet="Passport">
+                <ScalarProperty Name="ownerid" ColumnName="ownerid" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Station">
+            <EntityTypeMapping TypeName="NewDBModel.Station">
+              <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="departingtime" ColumnName="departingtime" />
+                <ScalarProperty Name="arrivaltime" ColumnName="arrivaltime" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NewDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket">
+            <EntityTypeMapping TypeName="NewDBModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="aeroplaneid" ColumnName="aeroplaneid" />
+                <ScalarProperty Name="ownerid" ColumnName="ownerid" />
+                <ScalarProperty Name="flightid" ColumnName="flightid" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="seat" ColumnName="seat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

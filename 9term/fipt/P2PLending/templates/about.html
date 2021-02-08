@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>О сервисе</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="about-page container">
+        <div class="page-header">
+            <h1 id="dialogs">О сервисе</h1>
+        </div>
+
+        <div class="about-items">
+
+            <div class="question-answer" id="what-is-it">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Для чего нужен наш сервис?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Сервис "Кредитоша" предназначен для кредитования между физическими лицами в режиме онлайн.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-answer" id="get-started">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Что мне необходимо для работы с сервисом?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Для работы с нашим сервисом Вам нужно
+                            <a href="{% url 'registration_register' %}">зарегистрироваться</a>
+                            и активировать аккаунт.
+                            После этого Вам будут доступны формы для оформления заявки/предложения.
+                            Кроме того, Вам потребуется
+                            <a href="#work-with-real-money">аккаунт платёжной системы Paypal</a>
+                            для ввода/вывода денежных средств.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-answer" id="restrictions">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Какие ограничения накладываются на заявки и предложения?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Сумма заявки/предложения находится в пределах от 50 до 1000 BYN,
+                            срок пользования кредитом - от 1 до 14 дней,
+                            процентная ставка по кредиту - от 0.1 до 10% в день.
+                            Срок актуальности - не более 90 суток.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-answer" id="account-balance">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Где я могу увидеть свой баланс?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Баланс пользователя можно просмотреть на
+                            <a href="{% url 'profile' %}">странице профиля</a>.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-answer" id="work-with-real-money">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Как при использовании сервиса оперировать реальными деньгами?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Для работы с сервисом Вам потребуется аккаунт платёжной системы
+                            <a href="www.paypal.com">PayPal</a>.
+                            На <a href="{% url 'profile' %}">странице профиля</a> пользователя
+                            Вы можете перечислять денежные средства со счёта Paypal на электронный счёт,
+                            привязанный к вашему аккаунту, и обратно.
+                            Именно с этим счётом в последующем Вам и придётся работать.
+                            <br><br>
+                            Для перевода денежных средств на баланс Вашего аккаунта укажите необходимую сумму,
+                            затем подтвердите перевод на странице аккаунта PayPal.
+                            <br><br>
+                            Чтобы вывести деньги со счёта Вашего аккаунта, Вам необходимо указать аккаунт PayPal,
+                            на который Вы хотите осуществить перевод, а также необходимую сумму. Деньги будут переведены
+                            автоматически.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-answer" id="scoring">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Что такое кредитный скоринг?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Скоринг-оценка помогает нам значительно улучшить процесс рассмотрения заявок на кредит.
+                            <br><br>
+                            На <a href="{% url 'profile' %}">странице профиля</a> пользователя вы можете указать
+                            данные о Вашем годовом доходе и наличии недвижимости в собственности. Эти данные помогут нам
+                            оценить Ваш уровень платёжеспособности и подбирать наиболее подходящие заявки и предложения.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-answer" id="mention">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-2x fa-question-circle-o">
+                            Как оставить отзыв об участнике проекта?
+                        </i>
+                    </div>
+                    <div class="panel-body">
+                        <i class="fa fa-016x fa-info-circle">
+                            Чтобы оставить отзыв о другом пользователе, Вам необходимо зайти на страницу профиля
+                            этого пользователя, перейти к полю ввода отзыва, заполнить его и нажать кнопку "Отправить".
+                            <br><br>
+                            Оставляя отзывы о пользователях, с которыми Вы сотрудничали, Вы помогаете другим пользователям
+                            с выбором, а также улучшаете работу сервиса. Мы тщательно подходим к вопросу лояльности наших
+                            клиентов, а потому пользователей с большим количеством негативных отзывов мы будем отключать
+                            от сервиса.
+                        </i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{%  endblock %}

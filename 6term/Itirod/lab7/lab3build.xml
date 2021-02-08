@@ -1,0 +1,43 @@
+<project name="lab3" default="all" basedir=".">
+	<property name="srcDir" value="D:\Labs\labs.6term\Java\lab3\src\com\lab3" />
+	<property name="dstDir" value="D:\Labs\labs.6term\Java\lab7\lab3" />
+	<property name="lib.dir" value="D:\Labs\labs.6term\Java\libs"/>
+	<target name="compilestatistics">
+		<javac includeantruntime="false" srcdir="${srcDir}\statistics" destdir="${dstDir}"
+			 classpathref="project.class.path" />
+	</target>
+	<target name="compiletest">
+		<javac includeantruntime="false" srcdir="${srcDir}\junit" destdir="${dstDir}"
+			 classpathref="project.class.path" />
+	</target>
+	<target name="main">
+		<javac includeantruntime="false" srcdir="${srcDir}\test" destdir="${dstDir}"
+			 classpathref="project.class.path" />
+	</target>
+	<target name="test">
+	  <junit fork="yes" haltonfailure="false">
+		<classpath refid="project.class.path"/>
+		<formatter type="plain" usefile="false" />
+		<test name="com.lab3.junit.LetterCounterTest" ></test>
+	  </junit>
+	</target>  
+	<target name="clean">
+		<delete>
+			<fileset dir="${dstDir}">
+			  <include name="**\*"/>
+		   </fileset>
+		</delete>
+	</target>	
+	<target name="all" depends="clean,compilestatistics,compiletest,main,test">
+		<jar destfile="${dstDir}\lab3.jar">
+ 		<fileset dir="${dstDir}">
+ 	 	  	<exclude name="**\junit\**"/>
+ 		</fileset>
+  	</jar>
+	</target>
+	<path id="project.class.path">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+		<pathelement location="${dstDir}"/>
+		<pathelement location="D:\Labs\labs.6term\Java\lab3\src"/>
+	</path>
+</project>

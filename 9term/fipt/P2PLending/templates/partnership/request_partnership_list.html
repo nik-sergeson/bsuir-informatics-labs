@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>Ваши подтверждённые заявки</title>
+{% endblock %}
+{% block content %}
+    <div class="proposal-partnership-list-page container">
+        <div class="page-header">
+            <h1 id="dialogs">На Ваши заявки откликнулись</h1>
+        </div>
+
+        <div class="container">
+            <div class="list-group">
+                {% for partnership in partnership_list %}
+                    <a href="{% url 'request_partnership' partnership_id=partnership.id %}" class="suggestion-item list-group-item">
+                        {% include "partnership/request_partnership_preview.html" with partnership=partnership only %}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

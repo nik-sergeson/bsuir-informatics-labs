@@ -1,0 +1,33 @@
+﻿@model Entities.Comment
+@{
+    ViewBag.Title = "EditCommetn";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Edit comment.</h2>
+</hgroup>
+
+@using (Html.BeginForm("EditComment","Bug", FormMethod.Post,new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Task Form</legend>
+        <ol>
+            
+                @Html.TextBoxFor(m => m.ID,new { @Value = ViewBag.Comment.ID,@type="hidden" })
+  
+                @Html.TextBoxFor(m => m.CreationTime,new { @Value = ViewBag.Comment.CreationTime,@type="hidden" })
+
+                @Html.TextBoxFor(m => m.User.ID,new { @Value = ViewBag.Comment.User.ID,@type="hidden" })
+  
+                @Html.TextBoxFor(m => m.Task.ID,new { @Value = ViewBag.Comment.Task.ID,@type="hidden" })
+            <li>
+                @Html.LabelFor(m => m.Text)
+                @Html.TextAreaFor(m=>m.Text,new { @Value = ViewBag.Comment.Text })
+            </li>
+         </ol>
+        <input type="submit" value="Edit" />
+    </fieldset>
+}

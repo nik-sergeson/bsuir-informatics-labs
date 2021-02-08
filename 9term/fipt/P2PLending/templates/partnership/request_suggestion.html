@@ -1,0 +1,36 @@
+<tr id="suggestion-{{ suggestion.id }}" class="suggestion">
+    <td>{{ suggestion.creation_date }}</td>
+    <td>{{ suggestion.user }}</td>
+    <td>{{ suggestion.rate }}%</td>
+    <td>
+        {% if suggestion.is_suggested %}
+            {% if not suggestion.user == request.user %}
+                {% if suggestion.can_be_accepted %}
+                    {% if money_request.is_opened %}
+                        <input type="button"
+                               class="btn btn-link"
+                               onclick="handleAccept('{% url "api_request_suggestion" suggestion_id=suggestion.id %}', '{{ suggestion.id }}' );"
+                               value="Принять ">
+                        <input type="button"
+                               class="btn btn-link"
+                               onclick="handleReject('{% url "api_request_suggestion" suggestion_id=suggestion.id %}', '{{ suggestion.id }}' );"
+                               value="Отклонить"/>
+                    {% endif %}
+                {% else %}
+                    <span>Вы не можете ответить на это предложение, пока у данного пользователя не будет необходимой суммы денежных средств.</span>
+                {% endif %}
+            {% else %}
+                {% if suggestion.can_be_accepted %}
+                     <span class="label label-info">Ожидание</span>
+                 {% else %}
+                     <span>Пользователь не сможет обработать Ваше предложение, пока у Вас нет необходимой суммы денежных средств.</span>
+                 {% endif %}
+            {% endif %}
+        {% elif suggestion.is_accepted %}
+            <span class="label label-success pull-left">Принято</span>
+        {% elif suggestion.is_rejected %}
+            <span class="label label-danger pull-right">Отклонено</span>
+        {% endif %}
+    </td>
+
+</tr>

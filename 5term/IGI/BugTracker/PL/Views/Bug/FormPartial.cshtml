@@ -1,0 +1,10 @@
+﻿@if(ViewBag.User!=null&&(ViewBag.User.UserGroup.ID==1||ViewBag.Task.User.ID==ViewBag.User.ID)){
+    <button id="ShowEdit">Edit</button>
+    <div id="edittaskdiv"><h3>Edit task</h3>
+    <table>
+        <tr><td><label>Description: </label></td><td><input type="text" id="editDescription" /></td></tr>
+    </table>
+    <button id="editTask">Save</button>
+    </div>
+}
+    

@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>Личный кабинет</title>
+{% endblock %}
+
+{% block content %}
+    {% csrf_token %}
+    <div class="profile-page container">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-md-10">
+              <h1 id="dialogs">Личный кабинет</h1>
+            </div>
+            <div class="col-md-2">
+              <a href="{% url 'user_info' user_id=user.id %}" id="user-info-btn" type="button" class="btn btn-primary btn-lg">Профиль</a>
+            </div>
+          </div>
+        </div>
+
+        {% if user.is_authenticated %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="panel">
+                  <a href="{% url 'about' %}#work-with-real-money" class="about-icon-link" data-toggle="tooltip" data-placement="left" title="" data-original-title="Узнайте больше о переводах">
+                    <i class="fa fa-2x fa-question-circle-o"></i>
+                  </a>
+                <div class="panel-heading">
+                    <h3>Ваш баланс: {{ user.usermoney.balance }}</h3>
+                </div>
+                <form class="form-horizontal" id="withdrawForm" method="get"
+                      action="{% url 'paypal:withdraw' user_id=user.id %}">
+                    <div class="form-group">
+                        <label for="email" class="col-lg-3 control-label">Аккаунт Paypal</label>
+                        <div class="col-lg-9">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Paypal">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount" class="col-lg-3 control-label">Сумма</label>
+                        <div class="col-lg-9">
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Сумма">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button class="btn btn-primary submit">Снять</button>
+                        </div>
+                    </div>
+                </form>
+                <form class="form-horizontal" id="putMoneyForm" method="get"
+                      action="{% url 'paypal:put' user_id=user.id %}">
+                    <div class="form-group">
+                        <label for="amount" class="col-lg-3 control-label">Сумма</label>
+                        <div class="col-lg-9">
+                            <input type="number" class="form-control" id="amount" name="amount" placeholder="Сумма">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <button class="btn btn-primary submit">Пополнить</button>
+                        </div>
+                    </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <a href="{% url 'about' %}#scoring" class="about-icon-link" data-toggle="tooltip" data-placement="left" title="" data-original-title="Узнайте больше о скоринге">
+                    <i class="fa fa-2x fa-question-circle-o"></i>
+                </a>
+              <form id="scoringForm" class="request-form panel panel-default input-panel" role="form" action="" method="post">
+
+                <h3>Кредитный скоринг</h3>
+                <div class="alert alert-dismissible alert-info">
+                    Поле 'Годовой доход' обязательно для заполнения
+                </div>
+
+                <div class="field-wrapper">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="{{ form.annual_income.id_for_label }}" class="field-title">Ваш годовой доход:</label>
+                      </div>
+                      <div class="col-md-7">
+                        <div class="input-group">
+                          <input type="number" class="form-control" name="annual_income" placeholder="Годовой доход" aria-describedby="currency">
+                          <span class="input-group-addon" id="currency">BYN</span>
+                        </div>
+                      </div>
+                    <span class="error">{{ form.annual_income.errors }}</span>
+                </div>
+
+                <div class="error">{{ form.non_field_errors }}</div>
+                <div class="field-wrapper">
+                    <div class="error">{{ form.home_ownership.errors }}</div>
+                    <label for="{{ form.home_ownership.id_for_label }}" class="field-title" >Какой формой недвижимости Вы владете:</label>
+                    <div class="radio-choices">
+
+                        {% for choice in form.home_ownership.field.choices %}
+                          <li class="radio-choice">
+                            <input type="radio" name="home_ownership" value="{{choice.0}}"
+                              {% ifequal form.home_ownership.data choice.0 %}
+                                 checked="checked"
+                              {% endifequal %}/>
+                            {% ifequal choice.0 "own" %}
+                              <label for="">собственность</label>
+                            {% endifequal %}
+                            {% ifequal choice.0 "rnt" %}
+                              <label for="">аренда</label>
+                            {% endifequal %}
+                            {% ifequal choice.0 "mrtg" %}
+                              <label for="">кредит/ипотека</label>
+                            {% endifequal %}
+                          </li>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="submit-button">
+                    <button type="submit" class="btn btn-primary submit">Отправить данные</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        {% endif %}
+  </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#withdrawForm").submit(function() {
+            $(this).submit(function() { return false; });
+            $('button.submit', $(this)).prop( 'disabled', true );
+            return true;
+        });
+        $("#putMoneyForm").submit(function() {
+            $(this).submit(function() { return false; });
+            $('button.submit', $(this)).prop( 'disabled', true );
+            return true;
+        });
+
+        $("input[value=own]").prop('checked', true);
+        $('input[type=radio][name=home_ownership]').change(function() {
+          $("button[type=submit]").prop('disabled', false);
+        });
+        $('input[type=number][name=annual_income').change(function() {
+          $("button[type=submit]").prop('disabled', false);
+        });
+
+        // valid income
+        var incomeregex = /^\d{0,8}(\.\d{0,2})?$/;
+        $.validator.addMethod("validincome", function (value, element) {
+            return this.optional(element) || incomeregex.test(value);
+        });
+
+        $("#scoringForm").validate({
+            rules: {
+                annual_income: {
+                    required: true,
+                    validincome: true,
+                },
+                home_ownership: {
+                    required: true,
+                },
+            },
+            messages: {
+                annual_income: {
+                    required: "Поле 'Годовой доход' обязательно для заполнения",
+                    validincome: "Годовой доход должен быть в пределах от 0 до 99999999.99",
+                },
+                home_ownership: {
+                    required: "Поле 'Недвижимость' обязательно для заполнения",
+                },
+            },
+            errorPlacement: function (error, element) {
+                $(element).closest('.input-panel').find('.alert-info').html(error.html());
+            },
+            highlight: function (element) {
+                $(element).closest('#id_annual_income').removeClass('has-success').addClass('has-error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).closest('#id_annual_income').removeClass('has-error').addClass('has-success');
+                $(element).closest('.input-panel').find('.alert-info').html('Пожалуйста, указывайте достоверные данные');
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+        // $('#scoringForm').find(':radio[name=home_ownership][value="own"]').prop('checked', true);
+
+    });
+</script>
+{% endblock %}

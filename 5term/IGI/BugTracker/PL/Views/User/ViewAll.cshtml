@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "ViewAll";
+}
+<table id="buglist" class="width100" cellspacing="1"><tbody>
+				<tr>
+					<td class="form-title" colspan="4">All users</td>
+				</tr>
+                @foreach(var b in ViewBag.Users)
+                {
+
+				    <tr bgcolor="#fcbdbd">
+                        <td>@b.ID.ToString()</td>
+                        <td class="center"><small>@b.Name</small></td>
+                        <td class="center">@b.UserGroup.Name</td>
+                        <td class="center">@b.Login<td>
+                        <td class="center">@b.Email</td>
+                         @if(ViewBag.User!=null&&ViewBag.User.UserGroup.ID==1&&b.UserGroup.ID!=1){
+                            <td>@Html.ActionLink("Make moderator", "Moderator", "User", new { id = b.ID },null)</td>
+                            <td>@Html.ActionLink("Delete", "Delete", "User", new { id = b.ID },null)</td>
+                         }
+                        </tr>
+                    }
+    </tbody>
+</table>

@@ -1,0 +1,1 @@
+java -jar  D:\Labs\labs.6term\SP\lab3\out\artifacts\lab3_jar\lab3.jar

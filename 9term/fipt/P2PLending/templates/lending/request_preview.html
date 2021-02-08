@@ -1,0 +1,31 @@
+{% load extra_tags %}
+<div>
+    <div class="row small">
+        <div class="pull-left">
+            <p class="id">Заявка #{{ money_request.id }}</p>
+        </div>
+        <div class="pull-right">
+            <p class="creation-date">Добавлено: {{money_request.creation_date}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="list-group-item-heading title">
+                {{money_request.amount}} на срок {{money_request.term.days}} дней
+            </h3>
+        </div>
+        <div class="col-md-6">
+            <p class="list-group-item-text">
+                Разместил(а): {{money_request.user}}
+                {% if money_request.user == request.user %}
+                    <span class="label label-primary">Это Вы</span>
+                {% endif %}
+            </p>
+            <p>Актуально до: {{money_request.end}}</p>
+            <p class="WARNING">Вероятность возврата {{ money_request.return_probability|py_format:".2%" }}</p>
+            {% if similarity %}
+                <p>Соответствие: {{ similarity|py_format:".2%" }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+{% load extra_tags %}
+<div>
+    <div class="row small">
+        <div class="pull-left">
+            <p class="id">Предложение #{{ money_proposal.id }}</p>
+        </div>
+        <div class="pull-right">
+            <p class="creation-date">Добавлено: {{money_proposal.creation_date}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="list-group-item-heading title">
+                <p>От {{money_proposal.min_amount}} до {{money_proposal.max_amount}}</p>
+                <p>на срок от {{money_proposal.min_term.days}} до {{money_proposal.max_term.days}} дней</p>
+            </h3>
+            <p class="subtitle">под {{money_proposal.rate}}% в день</p>
+        </div>
+        <div class="col-md-6">
+            <p class="list-group-item-text">
+                Разместил(а): {{money_proposal.user}}
+                {% if money_proposal.user == request.user %}
+                    <span class="label label-primary">Это Вы</span>
+                {% endif %}
+            </p>
+            <p>Актуально до: {{money_proposal.end}}</p>
+            {% if similarity %}
+                <p>Соответствие: {{ similarity|py_format:".2%" }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>

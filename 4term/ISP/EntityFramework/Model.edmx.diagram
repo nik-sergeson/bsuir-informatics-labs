@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="678de8fc40ab497da1831aa85ebd9560" Name="Diagram1">
+        <EntityTypeShape EntityType="NewDBModel.Aeroplane" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.baggage" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.Client" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.Flight" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.Passport" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.Station" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewDBModel.Ticket" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="NewDBModel.FK_Aeroplane_Flight1" ManuallyRouted="false" />
+        <AssociationConnector Association="NewDBModel.FK_Ticket_Aeroplane1" ManuallyRouted="false" />
+        <AssociationConnector Association="NewDBModel.FK_baggage_Client1" ManuallyRouted="false" />
+        <AssociationConnector Association="NewDBModel.FK_Passport_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="NewDBModel.FK_Ticket_Client1" ManuallyRouted="false" />
+        <AssociationConnector Association="NewDBModel.FK_Flight_Station1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

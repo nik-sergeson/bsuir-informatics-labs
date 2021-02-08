@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Stuff/default.css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <div> Bugtracker </div>
+		<table class="width100">
+			<tr>
+				<td class="menu">
+				@Html.ActionLink("Home", "Index", "Home") | 
+				@Html.ActionLink("Forum", "Index", "Forum") | 
+				@Html.ActionLink("Wiki", "Index", "Wiki",new{id=11},null)
+				</td>
+			</tr>
+		</table>
+		<div>
+            <section id="login">
+                        @Html.Partial("_LoginPartial")
+            </section> 
+		</div>
+		<table class="width100">
+			<tr>
+				<td  class="menu">@Html.ActionLink("All projects", "ViewAll", "Project")|
+				@Html.ActionLink("All issues", "ViewAll", "Bug") |
+				@Html.ActionLink("All users", "ViewAll", "User") 
+				</td>
+			</tr>
+    </table>               
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

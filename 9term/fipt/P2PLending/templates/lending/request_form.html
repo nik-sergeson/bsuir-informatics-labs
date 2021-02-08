@@ -1,0 +1,87 @@
+<form class="request-form panel panel-default input-panel" role="form" action="{% url 'request' %}" method="post">
+    {% csrf_token %}
+
+    <div class="panel-body">
+        <div class="input-block">
+            <div class="input-title">
+                <span>
+                    Сумма,
+                    <select id="loanCostCurrency" name="amount_1" required>
+                        <option value="BYN" selected="selected">BYN</option>
+                    </select>
+                </span>
+            </div>
+            <div class="slider-container">
+                <input type="text" id="loanCost" name="amount_0" data-slider-step="10">
+            </div>
+        </div>
+
+        <div class="input-block">
+            <div class="input-title">
+                <span>Срок, дней</span>
+            </div>
+            <div class="slider-container">
+                <input type="text" id="loanTime" data-slider-step="1">
+                <input type="hidden" id="loanTerm" name="term" required>
+            </div>
+        </div>
+
+        <div class="input-block">
+            <div class="input-title">
+                <span>Актуально до даты</span>
+            </div>
+            <div class="input-group date">
+                <input id="loanEndDate" name="end" class="datepicker" placeholder="Формат ввода: ГГГГ-ММ-ДД" required>
+            </div>
+
+        </div>
+
+        <div class="button-block">
+            <button type="submit" class="btn btn-primary">Оформить заявку</button>
+        </div>
+
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#loanCost").slider({
+            ticks: [50, 500, 1000],
+            ticks_labels: ['50', '500', '1000'],
+            ticks_snap_bounds: 1,
+            value: 100,
+            tooltip: 'always',
+            tooltip_position:'bottom',
+        });
+        $('#loanCost').val(100);
+        $('#loanCostCurrency').val('BYN');
+
+        $("#loanTime").slider({
+            ticks: [1, 7, 14],
+            ticks_labels: ['1', '7', '14'],
+            value: 3,
+            tooltip: 'always',
+            tooltip_position:'bottom',
+        });
+        $('#loanTerm').val('P3D');
+
+        $("#loanTime").on("change", function (slideEvt) {
+            $("#loanTerm").val("P" + slideEvt.value.newValue + "D");
+        });
+
+        $("#loanRate").slider({
+            ticks: [0.1, 2.5, 5, 7.5, 10],
+            ticks_labels: ['0.1', '2.5', '5', '7.5', '10'],
+            value: 0.5,
+            tooltip: 'always',
+            tooltip_position:'bottom',
+        });
+
+        $('#loanEndDate').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '0',
+            endDate: '+90d',
+            language: 'ru'
+        });
+    });
+</script>

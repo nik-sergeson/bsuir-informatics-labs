@@ -1,0 +1,328 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    /*background-color: #fffaf0;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.logo {
+    font-style: italic;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.logo-image {
+    display: initial !important;
+    transform: scale(1.2);
+}
+
+.tooltip {
+    z-index: 990;
+}
+
+.inverse {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: rgba(137, 205, 239, 0.55);
+}
+
+.direct, .inverse {
+    min-height: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Index page */
+.index .images,
+.index .title {
+    text-align: center;
+}
+.index .images img {
+    height: 150px;
+}
+.index .credit-tabs li {
+    font-weight: bold;
+    text-align: center;
+    width: 50%;
+}
+.index .credit-tabs li.active a,
+.index .operation-block {
+    background-color: #ffffff;
+}
+.index .operation-block {
+    padding-top: 10px;
+    border-left: 1px solid #e7e7e7;
+    border-right: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+.index .operation-block .operation-message {
+    text-align: center;
+    margin: 20px 80px;
+}
+.index .operation-block .operation-panel {
+    margin: 0 15px;
+}
+.index .operation-block .operation-panel .input-panel {
+    padding: 10px;
+}
+.index .operation-block .operation-panel .operation-calc {
+    font-size: 16px;
+}
+.index .operation-block .operation-panel .operation-calc .panel-heading {
+    background-color: #89cdef;
+}
+.index .operation-block .operation-panel .operation-calc .calc-value {
+    font-size: 18px;
+    font-weight: bold;
+}
+.index .operation-block .operation-panel .operation-calc .repayment-block {
+    margin-top: 30px;
+    text-align: center;
+}
+.index .operation-message span {
+    font-size: 18px;
+    font-weight: bold;
+}
+.index .operation-block .operation-panel .operation-confirm {
+    text-align: center;
+    margin: 40px 0;
+    transform: scale(1.2);
+}
+.index .operation-divider {
+    margin: 60px 40px;
+}
+/* END Index page */
+
+
+.creation-date,
+.end-date {
+    font-style: italic;
+}
+
+
+/* User info page */
+.user-info-page .join-date {
+    font-style: italic;
+}
+.user-info-page .page-header .row {
+    margin: 0 auto;
+}
+
+.user-info-page #cabinet {
+  margin: 20px 0 0 0;
+}
+.user-info-page .fullname {
+    font-size: 24px;
+    font-style: bold;
+    margin-bottom: 20px;
+}
+.user-info-page .form-control {
+    max-width: 100%;
+    min-height: 200px;
+}
+h3.center-header {
+  text-align: center;
+}
+.user-info-page .comment-area {
+    margin: 30px 0 40px 0;
+}
+.user-info-page .review-list {
+  margin-top: 40px;
+}
+/*contacts in user info*/
+.user-info-page .contacts {
+  margin-bottom: 20px;
+}
+.user-info-page .contacts p {
+  margin: 0 0 20px 20px;
+}
+.user-info-page .contacts .row {
+  margin: 10px auto;
+}
+.user-info-page .contacts .info-label {
+  /*text-align: right;*/
+}
+.user-info-page .contacts hr {
+  width: 80%;
+}
+.user-info-page .non-owner {
+  margin-top: 55px;
+}
+/*END contacts*/
+/*review style*/
+.review .panel-body {
+  word-wrap: break-word;
+  background-color: #fafafa;
+}
+.review .review-time {
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.review .own-comment .panel-heading {
+  background-color: #9fd5b1;
+}
+.own-comment {
+}
+/*END review style*/
+/* END User info page */
+
+/* Request and proposal list page */
+.request-list .request-item,
+.proposal-list .proposal-item {
+    border-color: #89cdef;
+}
+.request-list .request-item .title,
+.request-list .request-item .subtitle,
+.proposal-list .proposal-item .title,
+.proposal-list .proposal-item .subtitle {
+    text-align: center;
+}
+/* END Request and proposal list page */
+
+/* Request and proposal form panels */
+.input-panel {
+    padding: 10px;
+}
+.input-panel .input-block:not(:last-child) {
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+}
+.input-panel .input-block .input-title {
+    font: bold 18px arial;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.input-panel .input-block .slider {
+    width: 100%;
+}
+.input-panel .button-block {
+    float: right;
+}
+.input-panel .input-block .input-group.date {
+    width: 100%;
+}
+.input-panel .input-block .input-group.date .datepicker {
+    max-width: 100%;
+    width: 100%;
+}
+
+
+.proposal-form .slider-container {
+    margin-bottom: 20px;
+}
+/* END Request and proposal form panels */
+
+/* Profile page */
+.profile-page h1 {
+  margin-left: 10px;
+}
+.profile-page .page-header #user-info-btn {
+  margin: 20px 0 0 0;
+}
+
+.profile-page .explanation {
+  text-align: justify;
+}
+.profile-page .field-title {
+  font: 14px;
+  text-align: center;
+  margin: 10px;
+}
+.profile-page li.radio-choice {
+  font-size: 14px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.profile-page .field-wrapper {
+  margin-bottom: 15px;
+}
+.profile-page .error {
+  color: red;
+  font-size: 12px;
+}
+.profile-page .submit-button {
+  margin-top: 30px;
+  text-align: center;
+}
+#id_annual_income.has_error {
+  background-color: red;
+}
+.profile-page .panel {
+  min-height: 420px;
+}
+
+#putMoneyForm {
+  margin-top: 40px;
+}
+
+/*END Profile page*/
+
+.help-container {
+    text-align: center;
+}
+
+.fa-016x {
+    font-size: 1.6em;
+}
+
+.about-page .question-answer {
+    padding-top: 55px;
+}
+
+.about-icon-link {
+    margin-top: 10px;
+    margin-right: 10px;
+    float: right;
+}
+
+.suggestion-item {
+    border-color: #28b62c;
+}
+
+.WARNING {
+    color: red;
+}
+.WARNING-BACK {
+    background-color: red;
+}

@@ -1,0 +1,44 @@
+﻿@model Entities.Task
+@{
+    ViewBag.Title = "EditTaskForm";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Edit task.</h2>
+</hgroup>
+
+@using (Html.BeginForm("EditTask","Bug", FormMethod.Post,new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Task Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m=>m.Deadline)
+                @Html.TextBoxFor(m => m.Deadline,new { @Value = ViewBag.Task.Deadline })
+            </li>
+                @Html.TextBoxFor(m => m.ID,new { @Value = ViewBag.Task.ID,@type="hidden" })
+    
+                @Html.TextBoxFor(m => m.OpenDate,new { @Value = ViewBag.Task.OpenDate,@type="hidden" })
+    
+                @Html.TextBoxFor(m => m.User.ID,new { @Value = ViewBag.Task.User.ID,@type="hidden" })
+
+                @Html.TextBoxFor(m => m.Project.ID,new { @Value = ViewBag.Task.Project.ID,@type="hidden" })
+            <li>
+                @Html.LabelFor(m => m.Description)
+                @Html.TextAreaFor(m=>m.Description,new { @Value = ViewBag.Task.Description })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Priority)
+                @Html.TextAreaFor(m=>m.Priority,new { @Value = ViewBag.Task.Priority })
+            </li>
+            <li>
+                @Html.LabelFor(m => m.TaskStatus.ID)
+                @Html.TextAreaFor(m=>m.TaskStatus.ID,new { @Value = ViewBag.Task.TaskStatus.ID })
+            </li>
+         </ol>
+        <input type="submit" value="Edit" />
+    </fieldset>
+}

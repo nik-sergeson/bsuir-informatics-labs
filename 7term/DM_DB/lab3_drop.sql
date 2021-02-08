@@ -1,0 +1,10 @@
+use online_courses;
+alter table city drop foreign key fk_city_country1;
+drop table country_translate;
+alter table user_profile drop foreign key fk_user_profile_country1;
+alter table user_profile drop column country_id;
+drop table country;
+alter table user_profile drop foreign key fk_user_profile_city1;
+alter table user_profile drop column city_id;
+drop table city_translate;
+drop table city;

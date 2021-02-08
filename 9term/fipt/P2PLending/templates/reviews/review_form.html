@@ -1,0 +1,9 @@
+<form id="commentForm" role="form" action="{% url 'create_review' reviewed_id=reviewed_id%}" method="post">
+    {% csrf_token %}
+    <div class="row comment-area">
+      <div class="col-md-offset-1 col-md-10">
+        <textarea name="text" class="form-control" placeholder="Оставить отзыв об участнике" required></textarea>
+        <button type="submit" class="btn btn-info center-block" style="margin-top:10px">Отправить</button>
+      </div>
+    </div>
+</form>

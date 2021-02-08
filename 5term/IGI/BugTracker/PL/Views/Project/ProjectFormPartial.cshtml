@@ -1,0 +1,13 @@
+﻿<button id="ShowEdit">New</button>
+    <div id="editprojectdiv"><h3>New project</h3>
+    <table>
+        <tr><td><label>Name: </label></td><td><input type="text" id="editName" /></td></tr>
+        <tr><td><label>Description: </label></td><td><input type="text" id="editDescription" /></td></tr>
+    </table>
+    <button id="CreateProject">Save</button>
+    </div>
+<script type="text/javascript">
+    var Userid = '@ViewBag.User.ID';
+</script>
+@Scripts.Render("~/scripts/jquery-1.7.1.min.js")
+@Scripts.Render("~/scripts/NewProjectScript.js")

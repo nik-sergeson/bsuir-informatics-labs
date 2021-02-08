@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "ViewAll";
+}
+
+<table id="buglist" class="width100" cellspacing="1"><tbody>
+				<tr>
+					<td class="form-title" colspan="4">All issues</td>
+				</tr>
+                @foreach(var b in ViewBag.Bugs)
+                {
+                    if(b.TaskStatus.Name=="Opened")
+                    {
+				    <tr bgcolor="#fcbdbd">
+					<td>@b.Priority
+                         </td>
+                        <td>@Html.ActionLink((string)b.ID.ToString(), "Index", "Bug", new { BugId = b.ID },null)</td>
+                        <td class="center"><small>@b.Project.Name</small></td>
+                        <td class="center">@b.TaskStatus.Name</td>
+                        <td class="center">@b.OpenDate</td>
+                        <td class="center">@b.Description</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr bgcolor="#d2f5b0" border="1" valign="top">
+                         <td>@b.Priority
+                         </td>
+                        <td>@Html.ActionLink((string)b.ID.ToString(), "Index", "Bug", new { BugId = b.ID },null)</td>
+                        <td class="center"><small>@b.Project.Name</small></td>
+                        <td class="center">@b.TaskStatus.Name</td>
+                        <td class="center">@b.OpenDate</td>
+                        <td class="center">@b.Description</td>
+                        </tr>
+                    }
+				}
+			</tbody>
+			</table>
+

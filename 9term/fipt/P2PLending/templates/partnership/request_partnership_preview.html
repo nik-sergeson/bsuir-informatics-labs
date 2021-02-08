@@ -1,0 +1,25 @@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="creation-date pull-left">{{ partnership.creation_time }}</p>
+            {% if partnership.status == partnership.STARTED %}
+                <span class="badge pull-right">В процессе</span>
+            {% elif partnership.status == partnership.FINISHED %}
+                <span class="badge pull-right">Завершено</span>
+            {% elif partnership.status == partnership.CANCELLED %}
+                <span class="badge pull-right">Отменено</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p><span>Автор предложения: </span>{{ partnership.creditor }}</p>
+            <p><span>Сумма: </span>{{ partnership.amount }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><span>Ежедневный платёж: </span>{{ partnership.annuity_payment }}</p>
+            <p><span>Долг: </span>{{ partnership.borrower_dept }}</p>
+        </div>
+    </div>
+</div>
+

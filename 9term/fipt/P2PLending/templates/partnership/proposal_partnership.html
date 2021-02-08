@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>Вы откликнулись на предложение пользователя</title>
+{% endblock %}
+{% block content %}
+    <div class="proposal-partnership-page container">
+        <div class="page-header">
+            <h1 id="dialogs">Вы откликнулись на предложение пользователя</h1>
+        </div>
+
+        <h3>Пользователь оставил следующее предложение</h3>
+        <div class="list-group">
+            <div class="suggestion-item list-group-item">
+                {% include "lending/proposal_preview.html" with money_proposal=partnership.proposal only %}
+            </div>
+        </div>
+
+
+        {% if partnership.is_started %}
+            {% if is_borrower %}
+                <p>Ближайший ежедневный платёж ожидается {{ partnership.next_annuity_payment }}</p>
+                <p>Последний ежедневный платёж ожидается {{ partnership.final_annuity_payment }}</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Сумма ежедневного платежа {{ partnership.annuity_payment }}
+                            </li>
+                            {% if partnership.can_do_annuity_payment %}
+                                <li class="list-group-item">
+                                    <form role="form" action='{% url 'annuity_payment' partnership_id=partnership.partnership_id %}'
+                                          method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-success" type="submit">Выполнить ежедневный платёж</button>
+                                    </form>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Ваш текущий долг составляет {{ partnership.borrower_dept }}
+                            </li>
+                            {% if partnership.has_dept %}
+                                <li class="list-group-item">
+                                    <form role="form" action='{% url 'dept_payment' partnership_id=partnership.partnership_id %}'
+                                          method="post">
+                                        {% csrf_token %}
+                                        {{ dept_form.as_p }}
+                                        <button class="btn btn-success" type="submit">Выполнить долговой платёж</button>
+                                    </form>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+
+            <hr>
+
+            {% if partnership.cancel_initiated %}
+                {% if partnership.cancel_borrower_approved %}
+                    <div>{{ partnership.borrower }} отменил сделку</div>
+                {% endif %}
+                {% if partnership.cancel_creditor_approved %}
+                    <div>{{ partnership.creditor }} завершил сделку</div>
+                {% endif %}
+            {% endif %}
+            {% if not approved_cancel and can_approve_cancel %}
+                <form role="form" action='{% url 'proposal_partnership' partnership_id=partnership.partnership_id %}'
+                      method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-warning" type="submit">Отменить сделку</button>
+                </form>
+            {% endif %}
+        {% elif partnership.is_finished %}
+            <p>Сделка завершена</p>
+        {% elif partnership.is_cancelled %}
+            <p>Сделка отменена</p>
+        {% endif %}
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,27 @@
+﻿@model Entities.Task
+
+@{
+    ViewBag.Title = "New task";
+}
+
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Create a new task.</h2>
+</hgroup>
+
+@using (Html.BeginForm("NewTask","Bug", FormMethod.Post,new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Project Form</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Description)
+                @Html.TextAreaFor(m=>m.Description)
+            </li>
+         </ol>
+        <input type="submit" value="Create" />
+    </fieldset>
+}

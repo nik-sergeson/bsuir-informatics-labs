@@ -1,0 +1,5 @@
+<div class="review-list">
+    {% for review in review_list %}
+        {% include 'reviews/review_partial.html' with review=review only %}
+    {% endfor %}
+</div>

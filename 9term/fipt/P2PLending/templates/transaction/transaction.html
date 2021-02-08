@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>Транзакция #{{ transaction.id }}</title>
+{% endblock %}
+{% block content %}
+    <div>
+        <p>Кто перевёл: {{ transaction.source_user }}</p>
+        <p>Кому перевёл: {{ transaction.target_user }}</p>
+
+        <p>Сумма транзакции: {{ transaction.amount }}</p>
+        <p>Дата и время транзакции: {{ transaction.transaction_time }}</p>
+    </div>
+{% endblock %}

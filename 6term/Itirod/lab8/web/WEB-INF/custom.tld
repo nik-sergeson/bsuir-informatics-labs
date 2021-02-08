@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>2.0</jsp-version>
+  <short-name>Custom TLD</short-name>
+  <tag>
+    <name>task</name>
+    <tag-class>com.lab8.jsp.Tasktag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>task</name>
+      <required>false</required>
+      <type>com.lab5.model.Task</type>
+      <fragment>true</fragment>
+    </attribute>
+  </tag>
+  <tag>
+    <name>iterator</name>
+    <tag-class>com.lab8.jsp.IteratorTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>list</name>
+      <required>false</required>
+      <type>java.util.ArrayList</type>
+      <fragment>true</fragment>
+    </attribute>
+    <attribute>
+      <name>item</name>
+      <required>false</required>
+    </attribute>
+  </tag>
+</taglib>

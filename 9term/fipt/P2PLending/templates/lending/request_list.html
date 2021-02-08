@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>Заявки на кредитование</title>
+    {{ form.media }}
+{% endblock %}
+{% block content %}
+    <div class="request-list-page container">
+        <div class="page-header">
+            <h1 id="dialogs">Заявки на кредитование</h1>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="request-form-toggle">
+                        <h4>Хотите оставить заявку? Сделайте это прямо сейчас!</h4>
+                        {% include "lending/request_form.html" %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <h2>Список заявок</h2>
+        <div class="request-list list-group">
+            {% for money_request in request_list %}
+                <a href="{% url 'request' request_id=money_request.id %}" class="request-item list-group-item">
+                    {% include "lending/request_preview.html" with money_request=money_request user_id=user.id %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

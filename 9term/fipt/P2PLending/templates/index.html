@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Кредитоша - сервис онлайн-кредитования для физических лиц</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="index container">
+    <div class="row jumbotron">
+        <div class="col-md-4 images">
+            <img src="/static/images/kreditosha_full.png" />
+        </div>
+        <div class="col-md-8 title">
+            <h2>Кредитоша</h2>
+            <h3>Онлайн-сервис кредитования для физических лиц</h3>
+            <p class="lead">Вам срочно нужны деньги? Или Вы хотите заработать, дав в долг под проценты?
+            Тогда Вы обратились по адресу! Займы только по выгодным для Вас условиям!</p>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+
+        <div class="operation-block">
+            <div id="borrower-block">
+                <div class="operation-message">
+                    <span>Чтобы взять деньги взаймы, укажите необходимую Вам сумму, срок займа,
+                    а также максимально допустимую для Вас процентную ставку.</span>
+                </div>
+                <div class="row operation-panel">
+                    <div class="col-md-7">
+                        {% include "lending/request_form.html" %}
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <div class="panel panel-default operation-calc">
+                            <div class="panel-heading">Мы поможем взять деньги в долг</div>
+                            <div class="panel-body">
+                                <p>Укажите точную сумму, которая Вам нужна.
+                                <p>Затем выберите срок пользования займом.
+                                <p>Также не забудьте указать срок актуальности Вашей заявки.
+                                <p>В конце просто нажмите "Оформить заявку".
+{#                                <div class="row cost-block">#}
+{#                                    <span class="col-xs-6">Сумма, BYN:</span>#}
+{#                                    <span id="calc_loanCost-value" class="calc-value col-xs-6"></span>#}
+{#                                </div>#}
+{#                                <div class="row time-block">#}
+{#                                    <span class="col-xs-6">Срок, дней:</span>#}
+{#                                    <span id="calc_loanTime-value" class="calc-value col-xs-6"></span>#}
+{#                                </div>#}
+{#                                <div class="row rate-block">#}
+{#                                    <span class="col-xs-6">Ставка, % в день:</span>#}
+{#                                    <span id="calc_loanRate-value" class="calc-value col-xs-6"></span>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="operation-divider">
+                <hr>
+            </div>
+
+
+            <div id="creditor-block">
+                <div class="operation-message">
+                    <span>Чтобы дать деньги взаймы, укажите предлагаемую Вами сумму, срок займа,
+                    а также желаемую Вами процентную ставку.</span>
+                </div>
+                <div class="row operation-panel">
+                    <div class="col-md-7">
+                        {% include "lending/proposal_form.html" %}
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <div class="panel panel-default operation-calc">
+                            <div class="panel-heading">Мы поможем дать деньги в долг</div>
+                            <div class="panel-body">
+                                <p>Укажите диапазон денежных средств, которые Вы готовы дать в долг.
+                                <p>Затем выберите временной диапазон выдачи займа.
+                                <p>Кроме того, установите приемлемый для Вас ежедневный процент за пользование кредитом.</p>
+                                <p>Также не забудьте указать срок актуальности Вашего предложения.
+                                <p>В конце просто нажмите "Оформить предложение".
+{#                                <div class="row cost-block">#}
+{#                                    <span class="col-xs-6">Сумма, BYN:</span>#}
+{#                                    <span id="calc_creditCost-value" class="calc-value col-xs-6"></span>#}
+{#                                </div>#}
+{#                                <div class="row time-block">#}
+{#                                    <span class="col-xs-6">Срок, дней:</span>#}
+{#                                    <span id="calc_creditTime-value" class="calc-value col-xs-6"></span>#}
+{#                                </div>#}
+{##}
+{#                                <div class="row rate-block">#}
+{#                                    <span class="col-xs-6">Ставка, % в день:</span>#}
+{#                                    <span id="calc_creditRate-value" class="calc-value col-xs-6"></span>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="row">
+            <div class="col-md-offset-1 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Вам срочно нужны деньги на пару дней?</h2>
+                        <h3>Мы Вас выручим!</h3>
+                        <p>Возьмите кредит у других пользователей. Без справок и поручителей.</p>
+                        <p>Вы сами выбираете сумму, срок и процент по кредиту. Никакого обмана!</p>
+                        <p>Мы работаем только с проверенными и надёжными кредиторами, а ненадёжных отключаем от сервиса. Будьте спокойны!</p>
+                        <p>Просто авторизуйтесь и оставьте заявку.</p>
+                        <p><a href="{% url 'auth_login' %}" class="btn btn-success">Оформить заявку</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Ваши деньги лежат без дела?</h2>
+                        <h3>Заставьте их работать!</h3>
+                        <p>Дайте свои деньги в долг другим пользователям под проценты.</p>
+                        <p>Вы сами выбираете сумму, срок и приемлемый для вас процент. Всё честно!</p>
+                        <p>Мы работаем только с проверенными и надёжными заёмщиками, а ненадёжных отключаем от сервиса. Ваши деньги будут в сохранности!</p>
+                        <p>Просто авторизуйтесь и оставьте предложение.</p>
+                        <p><a href="{% url 'auth_login' %}" class="btn btn-success">Оформить предложение</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+    <div class="operation-divider">
+        <hr/>
+    </div>
+
+    <div class="help-container">
+        <h2>Остались вопросы?</h2>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-4 help-container">
+                <p><a href="{% url 'about' %}" class="btn btn-info btn-sm">Ознакомьтесь с описанием</a></p>
+            </div>
+            <div class="col-md-2">
+                <h4>или</h4>
+            </div>
+            <div class="col-md-4 help-container">
+                <p><a href="mailto:devtest.trash@gmail.com?subject=Вопрос по работе сервиса Кредитоша" class="btn btn-info btn-sm">Задайте свой вопрос нам</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

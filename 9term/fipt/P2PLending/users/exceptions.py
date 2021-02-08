@@ -1,0 +1,2 @@
+class UserMoneyException(Exception):
+    pass

@@ -1,0 +1,111 @@
+<form class="proposal-form panel panel-default input-panel" role="form" action="{% url 'proposal' %}" method="post">
+    {% csrf_token %}
+
+    <div class="panel-body">
+        <div class="input-block">
+            <div class="input-title">
+                <span>
+                    Сумма,
+                    <select id="creditCurrency" required>
+                        <option value="BYN" selected="selected">BYN</option>
+                    </select>
+                    <input type="hidden" id="creditMinCostCurrency" name="min_amount_1">
+                    <input type="hidden" id="creditMaxCostCurrency" name="max_amount_1">
+
+                </span>
+            </div>
+            <div class="slider-container">
+                <input type="text" id="creditCost" data-slider-step="10">
+                <input type="hidden" id="creditMinCost" name="min_amount_0">
+                <input type="hidden" id="creditMaxCost" name="max_amount_0">
+            </div>
+        </div>
+
+        <div class="input-block">
+            <div class="input-title">
+                <span>Срок, дней</span>
+            </div>
+            <div class="slider-container">
+                <input type="text" id="creditTime" data-slider-step="1">
+                <input type="hidden" id="creditMinTerm" name="min_term">
+                <input type="hidden" id="creditMaxTerm" name="max_term">
+            </div>
+        </div>
+
+        <div class="input-block">
+            <div class="input-title">
+                <span>Ставка, % в день</span>
+            </div>
+            <div class="slider-container">
+                <input id="creditRate" name="rate" data-slider-step="0.1">
+            </div>
+        </div>
+
+        <div class="input-block">
+            <div class="input-title">
+                <span>Актуально до даты</span>
+            </div>
+            <div class="input-group date">
+                <input id="creditEndDate" name="end" class="datepicker" placeholder="Формат ввода: ГГГГ-ММ-ДД" required>
+            </div>
+
+        </div>
+
+        <div class="button-block">
+            <button type="submit" class="btn btn-primary">Оформить предложение</button>
+        </div>
+
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#creditCost").slider({
+            min  : 50,
+            max  : 1000,
+            value: [150, 300],
+            tooltip: 'always',
+            tooltip_position:'bottom',
+            labelledby: ['ex18-label-2a', 'ex18-label-2b']
+        });
+        $('#creditMinCost').val(150);
+        $('#creditMaxCost').val(300);
+        $('#creditMinCostCurrency').val('BYN');
+        $('#creditMaxCostCurrency').val('BYN');
+
+        $('#creditCost').on('change', function(slideEvt) {
+            $('#creditMinCost').val(slideEvt.value.newValue[0]);
+            $('#creditMaxCost').val(slideEvt.value.newValue[1]);
+        });
+
+        $("#creditTime").slider({
+            min: 1,
+            max: 14,
+            value: [3, 7],
+            tooltip: 'always',
+            tooltip_position:'bottom'
+        });
+        $('#creditMinTerm').val('P3D');
+        $('#creditMaxTerm').val('P7D');
+
+        $('#creditTime').on('change', function(slideEvt) {
+            $('#creditMinTerm').val("P" + slideEvt.value.newValue[0] + "D");
+            $('#creditMaxTerm').val("P" + slideEvt.value.newValue[1] + "D");
+        });
+
+        $("#creditRate").slider({
+            ticks: [0.1, 2.5, 5, 7.5, 10],
+            ticks_labels: ['0.1', '2.5', '5', '7.5', '10'],
+            tooltip: 'always',
+            tooltip_position:'bottom',
+            value: 1,
+        });
+
+        $('#creditEndDate').datepicker({
+            format: 'yyyy-mm-dd',
+            startDate: '0',
+            endDate: '+90d',
+            language: 'ru'
+        });
+    });
+</script>

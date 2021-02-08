@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Back" GridPane.halignment="CENTER" />
+            <MenuButton mnemonicParsing="false" prefHeight="300.0" prefWidth="120.0" text="Add Content" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addImage" text="Image" />
+                <MenuItem mnemonicParsing="false" onAction="#addText" text="Text" />
+                  <MenuItem mnemonicParsing="false" onAction="#addVideo" text="Video" />
+              </items>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Add Problem" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addInput" text="Input" />
+                <MenuItem mnemonicParsing="false" onAction="#addMultilineInput" text="MultilineInput" />
+                  <MenuItem mnemonicParsing="false" onAction="#addMultipleChoice" text="MultipleChoice" />
+                  <MenuItem mnemonicParsing="false" onAction="#addSingleChoice" text="SingleChoice" />
+              </items>
+            </MenuButton>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Delete" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+            <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Settings" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
+         </children>
+      </GridPane>
+   </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="697.0">
+                     <children>
+                        <ListView fx:id="content" prefHeight="335.0" prefWidth="745.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="324.0" prefWidth="693.0">
+                     <children>
+                        <ListView fx:id="problems" prefHeight="335.0" prefWidth="708.0" AnchorPane.rightAnchor="-8.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

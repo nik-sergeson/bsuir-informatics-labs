@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head %}
+    <title>Профиль пользователя</title>
+{% endblock %}
+
+{% block content %}
+    <div class="user-info-page container">
+        <div class="page-header">
+          <div class='row'>
+            <div class="col-md-10">
+              <h1 id="dialogs">Профиль пользователя #{{ profile_owner.id }}</h1>
+              <div class="row">
+                  <div class="col-md-6">
+                      <p class="join-date">Участник проекта с {{ profile_owner.date_joined }}</p>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              {% if user == profile_owner %}
+                <a href="{% url 'profile'%}" id="cabinet" type="button" class="btn btn-primary btn-lg">Кабинет</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col" >
+            <div class="panel {% if user != profile_owner %} non-owner {% endif %}">
+              <div class="panel-heading">
+                <div class="fullname">
+                    <span class="firstname text-capitalize">{{ profile_owner.first_name }}</span>
+                    <span class="middlename text-capitalize">{{ profile_owner.patronymic }}</span>
+                    <span class="lastname text-capitalize">{{ profile_owner.last_name }}</span>
+                </div>
+              </div>
+
+                <div class="contacts">
+                    <p class="informations">Информация:</p>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-4 info-label">Email:</div>
+                        <div class="col-md-offset-1 col-md-6">{{ profile_owner.email }}</div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-4 info-label">Телефон:</div>
+                        <div class="col-md-offset-1 col-md-6">{{ profile_owner.phone }}</div>
+                    </div>
+
+                    {% if user == profile_owner %}
+                      <hr>
+                      <div class="row">
+                          <div class="col-md-offset-1 col-md-4 info-label">Форма недвижимости:</div>
+                          {% if profile_owner.home_ownership %}
+                            <div id="ownership" class="col-md-offset-1 col-md-6">{{ profile_owner.home_ownership }}</div>
+                          {% else %}
+                            <div class="col-md-offset-1 col-md-6">Заполните данные в личном кабинете</div>
+                          {% endif %}
+                      </div>
+
+                      <hr>
+                      <div class="row">
+                          <div class="col-md-offset-1 col-md-4 info-label">Годовой доход:</div>
+                          {% if profile_owner.income %}
+                            <div class="col-md-offset-1 col-md-6">{{ profile_owner.income }}</div>
+                          {% else %}
+                            <div class="col-md-offset-1 col-md-6">Заполните данные в личном кабинете</div>
+                          {% endif %}
+                      </div>
+                    {% endif %}
+                </div>
+            </div>
+          </div>
+          <div class="col-md-6 col">
+              <a href="{% url 'about' %}#mention" class="about-icon-link" data-toggle="tooltip" data-placement="left" title="" data-original-title="Узнайте больше об отзывах">
+                <i class="fa fa-2x fa-question-circle-o"></i>
+              </a>
+            <h3 class="center-header">Оставить отзыв</h3>
+            {% include 'reviews/review_form.html' with form=review_form reviewed_id=profile_owner.id only %}
+          </div>
+        </div>
+
+        <hr>
+        <div>
+            <div>
+                {% include 'reviews/review_list.html' with review_list=review_list only %}
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+      switch ($("#ownership").text()) {
+        case 'own':
+          $("#ownership").text('собственность')
+          break;
+        case 'rnt':
+          $("#ownership").text('аренда')
+          break;
+        case 'mrtg':
+          $("#ownership").text('кредит/ипотека')
+          break;
+      }
+    });
+</script>
+{% endblock %}

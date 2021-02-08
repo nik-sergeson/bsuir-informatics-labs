@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Ошибке в заполненной форме</title>
+{% endblock %}
+
+{% block content %}
+
+    {{ form.errors }}
+    <button onclick="location.href = '{{ back_url }}';" id="myButton">Вернуться</button>
+
+{% endblock %}

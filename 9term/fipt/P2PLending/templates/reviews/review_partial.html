@@ -1,0 +1,16 @@
+<div class="row review">
+  <div class="col-sm-8 col-sm-offset-2">
+    <div class="panel {% if review.reviewed_user == review.author %} own-comment {% else %}panel-info {% endif %}" >
+      <div class="panel-heading">
+        <span class="author-name">{{ review.author }}</span>
+        {% if review.reviewed_user == review.author %}
+          <span class="to"> (T.O.)</span>
+        {% endif %}
+        <span class="review-time">оставил отзыв {{ review.created_date }}</span>
+      </div>
+      <div class="panel-body">
+        {{ review.text }}
+      </div>
+    </div>
+  </div>
+</div>

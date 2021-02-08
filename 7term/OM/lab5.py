@@ -1,0 +1,25 @@
+from sympy import Matrix
+from qudratic_programming.QuadraticSolver import QuadraticSolver
+
+if __name__ == "__main__":
+    C = Matrix([-8, -6, -4, -6])
+    A = Matrix([[1, 0, 2, 1], [0, 1, -1, 2]])
+    B = Matrix([2, 3])
+    D = Matrix([[2, 1, 1, 0], [1, 1, 0, 0], [1, 0, 1, 0], [0, 0, 0, 0]])
+    solver = QuadraticSolver(A, B, C, D, 0.0001)
+    plan, supportig_set = solver.solve()
+    assert plan == Matrix([[1.7], [2.4], [0], [0.3]])
+    C = Matrix([0, 0, 0, 0])
+    A = Matrix([[2, -2, 14, 1], [1, -2, 10, 2]])
+    B = Matrix([2, 0])
+    D = Matrix([[4, 0, 0, 0], [0, 3, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]])
+    solver = QuadraticSolver(A, B, C, D, 0.0001)
+    plan, supportig_set = solver.solve()
+    assert plan == Matrix([[1.0], [1.75], [0.25], [0]])
+    C = Matrix([-3, -4, 0, 0])
+    A = Matrix([[1, 0.25, 1, 0], [1, 2, 0, 1]])
+    B = Matrix([4, 6])
+    D = Matrix([[1, -0.5, 0, 0], [-0.5, 4, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
+    solver = QuadraticSolver(A, B, C, D, 0.0001)
+    plan, supportig_set = solver.solve()
+    print(plan)

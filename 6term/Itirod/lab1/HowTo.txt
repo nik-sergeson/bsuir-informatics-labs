@@ -1,0 +1,2 @@
+javac ./HelloClass.java ./MainClass.java
+java -cp . com.lab1.MainClass.MainCalss

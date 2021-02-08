@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+{% load extra_tags %}
+{% block head %}
+    <title>Заявка на кредитование</title>
+{% endblock %}
+{% block content %}
+    <div class="request-page">
+        <div class="page-header container">
+            <h1 id="dialogs">Заявка на кредитование #{{ money_request.id }}</h1>
+            <div class="row">
+                <div class="pull-left">
+                    <p class="creation-date">Дата добавления: {{ money_request.creation_date }}</p>
+                </div>
+                <div class="pull-right">
+                    <p class="end-date">Заявка актуальна до: {{ money_request.end }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="direct container">
+            {% if money_request.user == user %}
+                <p><span class="label label-primary">Это Ваша заявка</span></p>
+            {% endif %}
+            <p>Автор заявки: <a href="{% url 'user_info' user_id=money_request.user.id %}">{{ money_request.user }}</a>
+            </p>
+            <p>Запрашиваемая сумма: {{ money_request.amount }}</p>
+
+            <p>Срок использования кредита, дней: {{ money_request.term.days }}</p>
+            <p class="WARNING">Вероятность возврата кредита: {{ money_request.return_probability|py_format:".2%" }}</p>
+        </div>
+
+        <div class="suggestions">
+            {% if is_owner %}
+                <div class="inverse">
+                    <div class="container">
+                        <h3>Вам предложили сотрудничество</h3>
+                        {% if suggestions %}
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Дата добавления</th>
+                                    <th>Автор предложения</th>
+                                    <th>Предлагаемая ставка, % в день</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for suggestion in suggestions %}
+                                    {% include "partnership/request_suggestion.html" with suggestion=suggestion %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="no-suggestions">Для Вашей заявки пока нет активных проедложений кредитования.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if money_request.is_opened %}
+                    <div class="direct container">
+                        <h3>Рекомендованные предложения</h3>
+                        <div class="proposal-list list-group">
+                            {% for recommendation in recommendations %}
+                                <a href="{% url 'proposal' proposal_id=recommendation.proposal.id %}"
+                                   class="proposal-item list-group-item">
+                                    {% include "lending/proposal_preview.html" with money_proposal=recommendation.proposal similarity=recommendation.similarity %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="inverse">
+                    <div class="container">
+                        <h3>Ваши активные сделки</h3>
+                        {% if suggestions %}
+                            <h4>Вы предложили на рассмотрение следующие сделки</h4>
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Дата добавления</th>
+                                    <th>Автор предложения</th>
+                                    <th>Предлагаемая ставка, % в день</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for suggestion in suggestions %}
+                                    {% include "partnership/request_suggestion.html" with suggestion=suggestion %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <h4 class="no-suggestions">Вы пока не предложили ни одной сделки.</h4>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if money_request.is_opened %}
+                    <div class="direct container">
+                        <h3>Отправьте для рассмотрения одно из Ваших предложений</h3>
+                        {% if user_proposals %}
+                            <div class="proposal-list list-group">
+                                {% for user_proposal in user_proposals %}
+                                    <div class="proposal-item list-group-item">
+                                        {% include "lending/proposal_preview.html" with money_proposal=user_proposal %}
+
+                                        <form role="form"
+                                              action="{% url 'proposal_to_suggestion' proposal_id=user_proposal.id request_id=money_request.id %}"
+                                              method="post">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm btn-primary">Предложить</button>
+                                        </form>
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <h4 class="no-suggestions">Вы пока не оставили ни одного предложения.</h4>
+                        {% endif %}
+                    </div>
+
+                    <div class="inverse">
+                        <div class="container">
+                            <h3>Вы можете предложить сделку прямо сейчас</h3>
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <form role="form"
+                                          action="{% url 'request_partnership_suggestion' request_id=money_request.id %}"
+                                          method="post" class="proposal-form panel panel-default input-panel">
+                                        {% csrf_token %}
+                                        <div class="panel-body">
+                                            <div class="input-block">
+                                                <div class="input-title">
+                                                    <span>Ставка, % в день</span>
+                                                </div>
+                                                <div class="slider-container">
+                                                    <input id="creditRate" name="rate" data-slider-step="0.1">
+                                                </div>
+                                            </div>
+                                            <div class="button-block">
+                                                <button type="submit" class="btn btn-primary">Оформить предложение
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#creditRate").slider({
+                ticks: [0.1, 2.5, 5, 7.5, 10],
+                ticks_labels: ['0.1', '2.5', '5', '7.5', '10'],
+                tooltip: 'always',
+                tooltip_position: 'bottom',
+                value: 1,
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'scripts/suggestion.js' %}"></script>
+{% endblock %}

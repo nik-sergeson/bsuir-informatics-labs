@@ -1,0 +1,1 @@
+DROP PACKAGE lab2;

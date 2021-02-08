@@ -1,0 +1,27 @@
+﻿<div id="CommentBlock"></div>
+<script type="text/javascript">
+    var Taskid = '@ViewBag.Task.ID';
+    var Userid = '@ViewBag.User.ID';
+    var Username = '@ViewBag.User.Name';
+    var Projectid = '@ViewBag.Task.Project.ID';
+    var Opendateval = '@ViewBag.Task.OpenDate';
+    var Deadlineval = '@ViewBag.Task.Deadline';
+    var Priorityval = '@ViewBag.Task.Priority';
+    var Taskstatusval = '@ViewBag.Task.TaskStatus.ID';
+</script>
+
+@Scripts.Render("~/scripts/jquery-1.7.1.min.js")
+@Scripts.Render("~/scripts/CommentScript.js")
+<div id="editcommentblock"><h3>Edit comment</h3>
+    <table>
+    <tr><td><label>Text: </label></td><td><input type="text" id="editText" /></td></tr>
+    </table>
+    <button id="editComment">Save</button>
+</div>
+@if (Request.IsAuthenticated){
+    <table>
+        <tr><td><label>Text: </label></td><td><input type="text" id="createComment" /></td></tr>
+    </table>
+    <button id="SubmitComment">Submit comment</button>
+}
+

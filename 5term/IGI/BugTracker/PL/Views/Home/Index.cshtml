@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div id="body">
+<table class="hide" border="0" cellspacing="3" cellpadding="0">
+			<tr>
+				<td valign="top" width="50%">
+					<table class="width100" cellspacing="1"><tbody>
+						<tr>
+							<td class="form-title" colspan="2">	New &nbsp;
+							<span class="bracket-link"><span> @ViewBag.open.Count
+							</td>
+						</tr>
+                  @foreach(var t in ViewBag.open)
+                    {
+					<tr bgcolor="#fcbdbd">
+						<td class="center" valign="top" width="0">
+							<span class="small">@Html.ActionLink((string)t.ID.ToString(), "Index", "Bug", new { BugId = t.ID },null)</span>
+						</td>
+						<td class="left" valign="top" width="100%">
+							<span class="small">@t.Description</span>
+						</td>
+					</tr>
+                     }
+                        </tbody>
+					</table>
+				</td>
+				<td valign="top" width="50%">
+					<table class="width100" cellspacing="1">
+					<tbody><tr>
+						<td class="form-title" colspan="2">Resolved<span</span> @ViewBag.resolv.Count</td>
+					</tr>
+               @foreach(var t in ViewBag.resolv)
+            {
+					<tr bgcolor="#d2f5b0">
+						<td class="center" valign="top" width="0">
+						<span class="small">@Html.ActionLink((string)t.ID.ToString(), "Index", "Bug", new { BugId = t.ID },null)</span>
+						</td>
+						<td class="left" valign="top" width="100%">	
+						<span class="small"></span>
+						</td>
+					</tr>
+                     }
+                   </tbody></table></td>
+                </div>

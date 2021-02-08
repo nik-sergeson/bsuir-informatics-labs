@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <MediaView fx:id="video" fitHeight="300.0" fitWidth="400.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Name" />
+            <TextField fx:id="name" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </top>
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Back" GridPane.halignment="CENTER" />
+            <Button fx:id="openButton" mnemonicParsing="false" onAction="#openButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Open" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Play" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonClicked" prefHeight="30.0" prefWidth="90.0" text="Save" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

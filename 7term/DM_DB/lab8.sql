@@ -1,0 +1,5 @@
+use online_courses;
+
+select education_level_id, count(distinct birthday) as different_birthdays from user_profile where locale_id=(select id from locale where locale='EN') group by education_level_id;
+select user_group_translate.translate, count(*) as member_ from user_has_user_group inner join user_group_translate on user_has_user_group.user_group_id=user_group_translate.user_group_id group by user_group_translate.translate;
+select user_profile.username, locale.locale, education_level_translate.translate from user_profile inner join locale on locale.id=user_profile.locale_id inner join education_level_translate on education_level_translate.education_level_id=user_profile.education_level_id where user_profile.user_email= any(select user_email from user_has_user_group where user_group_id=(select user_group_id from user_group_translate where translate='admin'));

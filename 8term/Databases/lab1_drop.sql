@@ -1,0 +1,14 @@
+DROP TABLE jobskills;
+DROP TABLE jobs;
+DROP TABLE accounts;
+DROP TABLE contacts;
+DROP TABLE employees;
+DROP TABLE companies;
+DROP TABLE skills;
+DROP SEQUENCE skills_seq;
+DROP SEQUENCE companies_seq;
+DROP SEQUENCE employees_seq;
+DROP SEQUENCE accounts_seq;
+DROP SEQUENCE jobs_seq;
+DROP SEQUENCE contacts_seq;
+DROP SEQUENCE jobskills_seq;

@@ -1,0 +1,10 @@
+drop TABLE inserted_companies;
+drop TABLE companies_operation;
+drop SEQUENCE ins_companies_seq;
+drop SEQUENCE companies_operation_seq;
+drop TRIGGER company_delete;
+drop TRIGGER company_insert;
+drop TRIGGER company_update;
+drop TABLE created_objects;
+drop SEQUENCE obj_creation_seq;
+drop TRIGGER objects_creation_tr;

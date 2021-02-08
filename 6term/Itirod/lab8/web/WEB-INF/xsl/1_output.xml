@@ -1,0 +1,31 @@
+<html>
+<body>
+<h1>Indian Languages details</h1>
+<table border="1">
+<tr>
+<th>Language</th><th>Family/Origin</th><th>No. of speakers</th><th>Region</th>
+</tr>
+<tr>
+<td>2</td><td>newdescr</td><td>2015-02-21</td><td>1</td>
+</tr>
+<tr>
+<td>3</td><td>test</td><td>2015-02-21</td><td>1</td>
+</tr>
+<tr>
+<td>4</td><td>test</td><td>2015-02-21</td><td>1</td>
+</tr>
+<tr>
+<td>5</td><td>test</td><td>2015-02-21</td><td>1</td>
+</tr>
+<tr>
+<td>7</td><td>test</td><td>2015-02-25</td><td>1</td>
+</tr>
+<tr>
+<td>8</td><td>descrnewnew</td><td>2015-03-14</td><td>4</td>
+</tr>
+<tr>
+<td>13</td><td>newnew</td><td>2015-03-14</td><td>5</td>
+</tr>
+</table>
+</body>
+</html>

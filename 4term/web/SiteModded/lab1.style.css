@@ -1,0 +1,267 @@
+{
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+}
+
+.userbar{
+margin-left:5px;
+margin-top:5px;
+margin-bottom:5px;
+}
+
+.userbar  a:hover {
+color: #ff9900 
+}
+
+ul.menu {
+list-style: none;
+margin-left:4px;
+margin-top:10px;
+margin-bottom:10px;
+}
+
+ul.menu li {
+display: inline;
+margin-left:2px;
+margin-right:2px;
+padding-left:0px;
+padding-right:0px;
+}
+
+ul.menu li a {
+font-family: Tahoma, Geneva, sans-serif; 
+text-decoration: none;
+background: #5c6cb7;
+font-weight: bold;
+color: #ffaa00; 
+padding: 6px 10px 6px 10px
+}
+
+ul.menu li a:hover {
+padding: 6px 10px 6px 10px;
+font-weight: bold;
+background: #364d95;
+color: #ff9900 
+}
+
+ul.menu li a.selected {
+background: #364e95
+} 
+
+body { 
+	background:transparent url(backgrnd.jpg);
+	font-size: 16px;
+	font-family: 'Trebuchet MS', 'Segoe UI';
+	color: #000000; 
+	line-height: 1.5em;
+	
+}
+
+body.header {
+	background-image: url('back_header.png');
+	background-position: 30px
+}
+
+body.menu {
+	background-image: url('back_menu.png');
+	background-size: 100%;
+	background-position: 0px 110px
+}
+
+body.pictures {
+	background-color: rgb(244, 254, 207);
+}
+
+h1 {
+	color: #FF0000;
+	margin-top: 1ex;	
+	margin-left: 2ex;
+}
+
+h2 {
+	color: #FF0000;
+}
+
+p {
+	text-indent: 1.5em;
+	text-align: justify;
+}
+
+p:first-letter {
+ color: #FF0000;
+ font-size: 18px;
+}
+
+a {
+	font-size: 18;
+	text-decoration: none;
+	color: #FF0000;
+	padding:  2px;
+	font-weight:bold
+}
+
+a:hover {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.gotop {
+	text-align: center;
+	margin: 1em;
+}
+
+ul, ol {
+	margin: 0em;
+}
+li {
+  margin-left: 0;
+  margin-top: 1em;
+}
+
+hr {
+	width: 100%;
+	height: 2px;
+	background-color: #000000;
+}
+
+table, tr, td {
+	border: 2px solid red;
+	border-collapse: collapse;
+}
+
+td {
+	width: 100%;
+	height: 232px;
+	text-align: left;
+}
+
+td.picture {
+	width: 300px;
+	height: 232px;
+	text-align: center;
+}
+
+td.picture img {
+	width: 300px;
+	height: 232px;
+}
+
+img {
+	
+	margin: 0px;
+}
+
+ul.regbutt {
+list-style: none;
+margin-left:1100px;
+margin-bottom:10px;
+margin-top:10px;
+}
+
+ul.regbutt li {
+display: inline;
+margin-left:2px;
+margin-right:2px;
+padding-left:0px;
+padding-right:0px;
+}
+
+ul.regbutt li a {
+font-family: Tahoma, Geneva, sans-serif; 
+text-decoration: none;
+font-weight: bold;
+color:#000000; 
+	background: #ea7b80;
+padding: 6px 10px 6px 10px
+}
+
+
+ul.regbutt li a.selected {
+background: #364e95
+} 
+
+* {margin:0; padding:0}
+#wrapper {width:583px; margin:0px auto}
+#container {position:relative; padding:12px; height:350px; }
+.sliderbutton {float:left;margin-top: 132; width:30px;height:77px; cursor:pointer}
+#slideleft {background:url(images/btn_prev.gif) 0px 0px no-repeat}
+#slideright {background:url(images/btn_next.gif) 0px 0px no-repeat}
+#slider {float:left; position:relative; overflow:auto; width:488px; height:350px}
+#slider ul {position:absolute; list-style:none; top:0; left:0}
+#slider li {float:left; width:558px; height:350px}
+.pagination {position:absolute; top:30px; right:51px; list-style:none; height:25px}
+.pagination li {float:left; cursor:pointer; height:8px; width:8px; background:#ccc; margin:0 4px 0 0; border:1px solid #fff}
+.pagination li:hover, li.current {background:#fff}
+
+
+.itemtableheader tr,td,table{
+	border-bottom: 0px;
+	margin: 30px auto 0px auto;
+	height:20px;
+}
+
+.itemtable table,tr,td
+ {
+    margin: 300px 0px 0px 100px;
+}
+.itemtable
+ {
+    margin: 0px auto 0px auto;
+}
+
+.itemtableheader td.itemid,
+.itemtable  td.itemid {
+	width: 45px;
+	padding-left:5px;
+}
+
+.itemtableheader  td.itemname,
+.itemtable  td.itemname {
+	width: 245px;
+	padding-left:5px;
+	height: 50px;
+}
+
+.itemtableheader  td.itemy,
+.itemtable  td.itemy{
+	width: 300px;
+	padding-left:5px;	
+}
+
+
+#dyntable .numbs{
+	height: 15px;
+}
+
+#dyntable .numbs ul li{
+    background-color: #C6DBFF;
+    border: 1px solid #C0C0C0;
+    border-radius: 12px;
+    color: #333333;
+    float: left;
+    font-size: 14px;
+    list-style: none outside none;
+	margin: 0px auto 0px auto;
+    padding: 5px;
+    width: 11px
+}
+
+#dyntable .numbs ul li:hover,
+#dyntable .numbs ul li.current {
+	background-color: #FFFFFF;
+	margin: 0px auto 0px 0px;
+	cursor: pointer;
+}
+
+.group{
+margin: 10px auto 0px 600px;
+}
+
+.active{
+margin: 10px auto 0px 600px;
+}
+
+#dyntable .total {
+	float: right;
+}

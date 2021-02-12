@@ -1,0 +1,31 @@
+clf;
+syms x y LeftPart RightPart InHequation; % Инициализация
+syms Title Message;
+syms x_new y_new;
+%	Нахождение решения
+LeftPart = 'D2y-5*Dy+6*y';
+RightPart = '13*sin(3*x)';
+InHequation = [LeftPart, '=', RightPart];
+y = simplify(dsolve(InHequation, 'x'));
+Title = ['Integral Curves of Equation:', char(InHequation)];
+Message = ['y = ', char(y)]; 
+%hold on; 
+%grid on;
+dy=diff(y,'x');
+y=subs(y,'C2',1);
+dy=subs(dy,'C2',1);
+dy=subs(dy,'C3',1);
+y=subs(y,'C3',1);
+somfrase=(['y','=',char(y)]);
+z=inline(y);
+z1=inline(dy);
+x=0:1:10;
+y=subs(y,'x',x);
+dy=subs(dy,'x',x);
+%plot(y,dy);
+plot3(y,dy,x);
+grid on;
+legend(char(Message));
+title(char(Title));
+xlabel('X axis');
+ylabel('Y axis');

@@ -1,0 +1,47 @@
+﻿@model Entities.Comment
+
+@{
+   
+    ViewBag.Title = "Bug";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="Commentblock">
+<table class="width100" cellspacing="1"><tbody>
+				<tr>
+					<td class="form-title" colspan="4">View Issue Details    @if(ViewBag.User!=null&&(ViewBag.User.UserGroup.ID==1||ViewBag.Task.User.ID==ViewBag.User.ID)){
+    @Html.ActionLink("Delete", "DeleteTask", "Bug", new { id = ViewBag.Task.ID },null)
+}</td>
+				</tr>
+				<tr>
+					<td class="category" width="15%">ID</td>
+					<td class="row-1">@ViewBag.Task.ID</td>
+				</tr>
+				<tr>
+					<td class="category">Project</td>
+					<td class="row-2">@ViewBag.ProjName</td>
+				</tr>
+				<tr>
+					<td class="category">Date Submitted</td>
+					<td class="row-1">@ViewBag.Task.OpenDate</td>
+				</tr>
+				<tr>
+					<td class="category">Deadline</td>					
+					<td class="row-2">@ViewBag.Task.Deadline</td>
+				</tr>
+				<tr>
+					<td class="category">Reporter</td>
+					<td class="row-1">@ViewBag.RepName</td>
+				</tr>
+				<tr>
+					<td class="category">Priority</td>
+					<td  class="row-2">@ViewBag.Task.Priority</td>
+				</tr>
+				<tr>
+					<td class="category">Description</td>
+					<td  class="row-1">@ViewBag.Task.Description</td>
+				</tr>
+			</tbody>
+			</table>
+    </div>
+@Html.Partial("FormPartial")
+@Html.Partial("CommentPartial")

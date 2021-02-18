@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div id="projectblock">
+<table class="width100" cellspacing="1"><tbody>
+				<tr>
+					<td class="form-title" colspan="4">View Project Details  @if (Request.IsAuthenticated){
+    if(ViewBag.User!=null&&(ViewBag.User.UserGroup.ID==1||ViewBag.Proj.User.ID==ViewBag.User.ID)){
+    @Html.ActionLink("Delete", "DeleteProject", "Project", new { id = ViewBag.Proj.ID },null)
+}
+}</td>
+				</tr>
+				<tr>
+					<td class="category" width="15%">Name</td>
+					<td class="row-1">@ViewBag.Proj.Name</td>
+				</tr>
+				<tr>
+					<td class="category">Description</td>
+					<td class="row-2">@ViewBag.Proj.Description</td>
+				</tr>
+				<tr>
+					<td class="category">Name</td>
+					<td class="row-1">@ViewBag.Proj.User.Name</td>
+				</tr>
+			</tbody>
+			</table>
+    </div>
+@if (Request.IsAuthenticated){
+@Html.Partial("ProjectEditPartial")
+<script type="text/javascript">
+    var Userid = '@ViewBag.User.ID';
+    var Projectid = '@ViewBag.Proj.ID';
+</script>
+@Scripts.Render("~/scripts/jquery-1.7.1.min.js")
+@Scripts.Render("~/scripts/ProjectScript.js")
+<button id="NewTask">New task</button>
+ if(ViewBag.User != null && (ViewBag.User.UserGroup.ID == 1 || ViewBag.Proj.User.ID == ViewBag.User.ID))
+    {
+        <button id="ShowEdit">Edit project</button>
+    }
+}
+<div id="projectbugs">
+<table id="buglist" class="width100" cellspacing="1"><tbody>
+				<tr>
+					<td class="form-title" colspan="4">All issues</td>
+				</tr>
+                @foreach (var b in ViewBag.Tasks)
+                {
+                    if (b.TaskStatus.Name == "Opened")
+                    {
+				    <tr bgcolor="#fcbdbd">
+                        <td>@Html.ActionLink((string)b.ID.ToString(), "Index", "Bug", new { BugId = b.ID }, null)</td>
+                        <td class="center"><small>@b.Project.Name</small></td>
+                        <td class="center">@b.TaskStatus.Name</td>
+                        <td class="center">@b.OpenDate</td>
+                        <td class="center">@b.Description</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr bgcolor="#d2f5b0" border="1" valign="top">
+                         <td>@b.Priority
+                         </td>
+                        <td>@Html.ActionLink((string)b.ID.ToString(), "Index", "Bug", new { BugId = b.ID }, null)</td>
+                        <td class="center"><small>@b.Project.Name</small></td>
+                        <td class="center">@b.TaskStatus.Name</td>
+                        <td class="center">@b.OpenDate</td>
+                        <td class="center">@b.Description</td>
+                        </tr>
+                    }
+				}
+			</tbody>
+			</table>
+    </div>

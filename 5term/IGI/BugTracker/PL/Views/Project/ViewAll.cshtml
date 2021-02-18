@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "ViewAll";
+}
+<div id="ProjectBlock">
+<table class="width100" cellspacing="1"><tbody>
+				<tr>
+					<td class="form-title" colspan="4">All projects</td>
+				</tr>
+                @foreach(var b in ViewBag.Proj)
+                {
+                    <tr>
+                        <td>@Html.ActionLink((string)b.ID.ToString(), "Index", "Project", new {id = b.ID },null)</td>
+                        <td class="center"><small>@b.Name</small></td>
+                        <td class="center">@b.Description</td>
+                        <td class="center">@b.User.Name</td>
+                    </tr>
+				}
+			</tbody>
+			</table>
+</div>
+@if (Request.IsAuthenticated){
+    @Html.Partial("ProjectFormPartial")
+}
+

@@ -1,0 +1,1 @@
+java -jar  D:\Labs\labs.6term\SP\lab4.server\out\artifacts\lab4_server_jar\lab4.server.jar
